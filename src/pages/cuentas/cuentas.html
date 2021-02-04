@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
+    <ion-title>
+      Cuentas abiertas
+    </ion-title>
+    <ion-buttons end>
+      <button (click)="salir()" ion-button icon-end>
+          Salir
+        
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content style="background-image: url('../../assets/fondo.jpg');">
+  <ion-refresher (ionRefresh)="actualizandoTransacciones($event)" >
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+  <ion-list>
+      <ion-item-sliding *ngFor="let i of arreglo">
+          <ion-item  (click) = "entrarDetalle(i)">
+            <ion-avatar item-start>
+              <img src="../../assets/hombre.jpg">
+            </ion-avatar>
+            <h2>Cuenta: {{i.nombre}}</h2>
+            <p>Número de folio: {{i.id_folio}}</p>
+          </ion-item>  
+          <ion-item-options side="right">
+              <button color="success" (click)  = "cobrarT(i);" ion-button><ion-icon name="checkmark-circle"></ion-icon>Cobrar</button>
+            <button color="light" (click)  = "cobrar(i);" ion-button><ion-icon name="print"></ion-icon>PreTicket</button>
+            <button color="danger" (click) = "cancelar(i.id_ticket)" ion-button><ion-icon name="trash" ></ion-icon>Cancelar
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+    </ion-list>
+
+  <ion-fab right bottom #fab>
+    <button ion-fab color="botonflotante"><ion-icon name="arrow-dropup"></ion-icon></button>
+    <ion-fab-list side="top">
+        <button ion-fab (click)="agregarCuenta(fab);"><ion-icon name="cart"></ion-icon></button>        
+    </ion-fab-list>
+  </ion-fab>
+</ion-content>

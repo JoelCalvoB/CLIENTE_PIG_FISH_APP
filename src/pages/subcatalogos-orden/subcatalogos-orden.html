@@ -1,0 +1,44 @@
+<!--
+  Generated template for the SubcatalogosOrdenPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Agregar a cliente</ion-title>
+    <ion-buttons left>
+      <button (click)="salir()" ion-button icon-end icon-only>
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+    <div cards>
+
+        <div class="grid-full">
+          <ion-row>
+            <ion-col  *ngFor = "let i of arreglo">
+              <ion-card>
+                <h4 orange><strong>{{i.nombre}}</strong></h4>
+                <p>Cuenta abierta </p>
+                <button (click)="agregarCarrito(i)" style="width:100%" ion-button icon-only color="success">
+                    Agregar<ion-icon name="cart"></ion-icon> 
+                  </button>
+              </ion-card>
+            </ion-col>          
+          </ion-row>
+        </div>
+    
+      </div>
+
+  <ion-fab right bottom #fab>
+    <button ion-fab color="botonflotante"><ion-icon name="arrow-dropup"></ion-icon></button>
+    <ion-fab-list side="top">
+        <button ion-fab (click)="agregarCuenta(fab);"><ion-icon name="cart"></ion-icon></button>
+    </ion-fab-list>
+  </ion-fab>
+</ion-content>

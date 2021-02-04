@@ -1,0 +1,86 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Detalle Cuenta</ion-title>
+    <ion-buttons left>
+      <button (click)="salir()" ion-button icon-end icon-only>
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-toolbar mode="md" color="primary">
+    <ion-segment #segments mode="md" [(ngModel)]="page" color="white">
+      <ion-segment-button value="0" (click)="selectedTab(0)">
+        Agregar a la orden
+      </ion-segment-button>
+      <ion-segment-button value="1" (click)="selectedTab(1)">
+        Ver Orden
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-slides #slider (ionSlideDidChange)="slideChanged()">
+    <ion-slide>
+      <ion-content class="fondo">
+          <div cards>
+
+            <ion-grid>
+              <ion-row>
+                <ion-col *ngFor="let item of arreglo" col-6 col-sm-4  col-md-3 col-lg-2 col-xl-1>
+                  <div class="divs" (click) = "agregar(item)">
+                    <img [src]="item.imagen" alt="">
+                    <h5>{{item.nombre}}</h5>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-grid>          
+            </div>
+      </ion-content>
+    </ion-slide>
+    <ion-slide>
+      <ion-content>
+        <ion-grid class="fondo letras">
+          <ion-row *ngFor="let i of detalle">
+            <ion-col col-5>
+              <marquee>{{i.nombre}} {{i.observaciones}}</marquee>
+            </ion-col>
+            <ion-col col-2 *ngIf="!i.servido">
+              <button (click)="modificaCuenta(i)" style="top: -10px;" ion-button icon-only color="amarillo">
+                <ion-icon name="brush"></ion-icon>
+              </button>
+            </ion-col>
+            <ion-col col-2 *ngIf="i.servido">
+              <button *ngIf="!i.cancelado" (click)="cancelardetalle(i)" style="top: -10px;" ion-button icon-only color="success">
+                <ion-icon name="checkmark"></ion-icon>
+              </button>
+              <button *ngIf="i.cancelado"  style="top: -10px;" ion-button icon-only color="danger">
+                <ion-icon name="close"></ion-icon>
+              </button>
+            </ion-col>
+            <ion-col col-2>
+              {{i.cantidad}}
+            </ion-col>
+            <ion-col>
+              {{(i.cantidad * i.precio) | currency}}
+            </ion-col>
+          </ion-row>
+          <ion-row style="background: #caefe5;font-size: 115%; color: #c50101;">
+              <ion-col col-9 style="text-align: right; ">
+                  <strong>Total:</strong>
+              </ion-col>
+              <ion-col >
+                  <strong>{{total | currency}}</strong>
+              </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-content>
+    </ion-slide>
+  </ion-slides>
+</ion-content>
+<ion-footer>
+  <ion-toolbar color="gris" style="text-align: center">
+    <button (click) = "verCuenta();" ion-button icon-only color="light" style="width: 80%;">            
+      Ver cuenta
+    </button>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
+    <ion-title>
+      Herramientas de Inventarios 
+    </ion-title>
+    <ion-buttons end>
+      <button (click)="salir()" ion-button icon-end>
+          Salir
+        
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+    <form [formGroup]="myForm" (ngSubmit)="saveData()">
+  
+
+      <ion-item>Ingrese la cantidad a calcular</ion-item>
+            <ion-item formControlName="cantidad">
+                <ion-icon name="cart" item-start></ion-icon>
+                <ion-label fixed >Cantidad</ion-label>
+                <ion-input type="number" value=""></ion-input>
+              </ion-item>
+              
+
+              <ion-item>Seleccione el producto</ion-item>
+        <ion-item>
+              <button (click)="agregarproducto()" item-end style="width:10%" ion-button icon-only color="light" type="button">
+
+                  <ion-icon name="add-circle"></ion-icon>   
+                </button>
+                <ion-item >
+                  <ion-avatar item-start>
+                    <img src="../../assets/imgs/enlace.png">
+                  </ion-avatar>
+                  <h2><strong>{{nombre}}</strong></h2>
+                 </ion-item>
+                </ion-item>
+    
+                <ion-item style="text-align: center"> <button ion-button color="danger" round  type="submit" [disabled]="!myForm.valid">CALCULAR</button></ion-item>
+               
+                <ion-list>
+                  <ion-item *ngFor="let item of desglose">
+                    <ion-avatar item-start>
+                      <img src="../../assets/imgs/enlace.png">
+                    </ion-avatar>
+                    <h2>{{item.descripcion}}</h2>
+                    <h3>Cantidad Requerido:</h3>
+                    <p>{{item.calculo +' ' +item.unidad_medida}}</p>
+                  </ion-item>
+                </ion-list>
+
+    </form>  
+  </ion-content>
+  
+  
